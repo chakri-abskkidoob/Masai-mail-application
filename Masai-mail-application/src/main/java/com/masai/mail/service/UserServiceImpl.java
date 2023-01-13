@@ -49,4 +49,14 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	@Override
+	public User updateUserDetails(String email, User user) {
+		User u = userRepo.findById(email).get();
+		u.setDateOfBirth(user.getDateOfBirth());
+		u.setFirstName(user.getFirstName());
+		u.setLastName(user.getLastName());
+		u.setMobileNumber(user.getMobileNumber());
+		return userRepo.save(u);
+	}
+
 }

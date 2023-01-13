@@ -1,5 +1,7 @@
 package com.masai.mail.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,30 @@ public class MailServiceImpl implements MailService{
 		mail.setStarred(false);
 		mailRepo.save(mail);
 		
+	}
+
+	@Override
+	public List<Mail> getAllMails(String email) {
+		return mailRepo.findByUserEmailId(email);
+	}
+
+	@Override
+	public void makeStarred(Long mailId) {
+		Mail m = mailRepo.findBymailId(mailId);
+		m.setStarred(true);
+		mailRepo.save(m);
+	}
+
+	@Override
+	public void deleteMail(Long mailId) {
+		Mail m = mailRepo.findBymailId(mailId);
+		m.setDeleted(true);
+		mailRepo.save(m);
+	}
+
+	@Override
+	public List<Mail> getAllStarredMails(String email) {
+		List<Mail> mails = mailRepo.findByUserEmailId(email);
+		return mails.stream().filter( e -> e.getStarred() == true).toList();
 	}
 }

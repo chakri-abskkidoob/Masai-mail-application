@@ -9,4 +9,6 @@ public interface UserService {
 
 	boolean login(UserDTO userdto);
 
+	User updateUserDetails(String email, User user);
+
 }

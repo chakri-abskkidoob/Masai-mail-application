@@ -1,10 +1,11 @@
 package com.masai.mail.entity;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class User {
 	private Boolean loggedIn;
 	private String password;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Mail> mails;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Mail> mails;
 	
 }
